@@ -1,4 +1,4 @@
-# 🤖 Sentiment Analysis — Transformer From Scratch (PyTorch)
+# 🤖 Sentiment Analysis - Transformer From Scratch (PyTorch)
 
 A full end-to-end NLP pipeline that implements a **Transformer Encoder from scratch** in PyTorch for 3-class sentiment classification — without relying on `nn.Transformer` or pretrained models.
 
@@ -6,15 +6,29 @@ A full end-to-end NLP pipeline that implements a **Transformer Encoder from scra
 
 ## 📊 Dataset
 
-| Attribute | Detail |
-|-----------|--------|
-| **File** | `sentiment_data_cleaned.csv` |
-| **Columns** | `Comment` (text), `Sentiment` (label) |
-| **Classes** | `0` = Negative · `1` = Neutral · `2` = Positive |
-| **Domain** | User comments about mobile payment services (e.g. Apple Pay) |
-| **Avg. comment length** | ~20 words per comment |
+The dataset is sourced from **Kaggle** and contains **241,145 user comments** for 3-class sentiment classification.
+
+| Attribute               | Detail                                                                                                                |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| **Source:**             | [Kaggle - Sentiment Analysis Dataset](https://www.kaggle.com/datasets/abdelmalekeladjelet/sentiment-analysis-dataset) |
+| **File**                | `sentiment_data_cleaned.csv`                                                                                          |
+| **Total samples**       | **241,145 rows**                                                                                                      |
+| **Columns**             | `Comment` (text), `Sentiment` (label)                                                                                 |
+| **Classes**             | `0` = Negative · `1` = Neutral · `2` = Positive                                                                       |
+| **Domain**              | User comments about mobile payment services (e.g. Apple Pay)                                                          |
+| **Avg. comment length** | ~20 words per comment                                                                                                 |
+
+### Class Distribution
+
+| Label     | Sentiment | Samples     | Percentage |
+| --------- | --------- | ----------- | ---------- |
+| **0**     | Negative  | 55,114      | 22.85%     |
+| **1**     | Neutral   | 82,972      | 34.41%     |
+| **2**     | Positive  | 103,059     | 42.75%     |
+| **Total** | —         | **241,145** | **100%**   |
 
 **Label mapping:**
+
 - **0 — Negative:** complaints, dissatisfaction, limitations ("don't like the high fees", "doesn't take Apple Pay")
 - **1 — Neutral:** factual or mixed observations ("required brand new iPhone to use")
 - **2 — Positive:** satisfaction, convenience, praise ("convenient, secure, easy to use")
@@ -59,6 +73,7 @@ Softmax → {Negative, Neutral, Positive}
 ```
 
 **Key design choices:**
+
 - **Pre-LayerNorm** (before attention) for more stable training than Post-LN
 - **Masked mean pooling** — averages only non-padding token representations
 - **Xavier uniform init** for projection weights, Normal(0, 0.02) for embeddings
@@ -68,21 +83,21 @@ Softmax → {Negative, Neutral, Positive}
 
 ## ⚙️ Configuration
 
-| Hyperparameter | Value |
-|----------------|-------|
-| Vocab size | 40,000 (top-K by freq) |
-| Min word frequency | 2 |
-| Max sequence length | 64 |
-| Embedding dim | 128 |
-| Attention heads | 4 |
-| Encoder layers | 3 |
-| FFN hidden dim | 256 |
-| Dropout | 0.3 |
-| Batch size | 512 |
-| Max epochs | 30 (early stopping patience = 5) |
-| Optimizer | AdamW (lr=1e-4, weight decay=1e-4) |
-| Scheduler | Linear warmup (500 steps) → Cosine decay |
-| Gradient clipping | 1.0 |
+| Hyperparameter      | Value                                    |
+| ------------------- | ---------------------------------------- |
+| Vocab size          | 40,000 (top-K by freq)                   |
+| Min word frequency  | 2                                        |
+| Max sequence length | 64                                       |
+| Embedding dim       | 128                                      |
+| Attention heads     | 4                                        |
+| Encoder layers      | 3                                        |
+| FFN hidden dim      | 256                                      |
+| Dropout             | 0.3                                      |
+| Batch size          | 512                                      |
+| Max epochs          | 30 (early stopping patience = 5)         |
+| Optimizer           | AdamW (lr=1e-4, weight decay=1e-4)       |
+| Scheduler           | Linear warmup (500 steps) → Cosine decay |
+| Gradient clipping   | 1.0                                      |
 
 ---
 
@@ -110,31 +125,31 @@ Softmax → {Negative, Neutral, Positive}
 
 ## 📈 Results
 
-| Metric | Score |
-|--------|-------|
-| **Test Accuracy** | **80.97%** |
+| Metric                 | Score      |
+| ---------------------- | ---------- |
+| **Test Accuracy**      | **80.97%** |
 | **Test F1 (weighted)** | **0.8100** |
 
 **Per-class performance (Test Set):**
 
-| Class | Precision | Recall |
-|-------|-----------|--------|
-| Negative | ~80% | 80.25% |
-| Neutral | ~75% | 75.18% |
-| Positive | ~86% | 85.99% |
+| Class    | Precision | Recall |
+| -------- | --------- | ------ |
+| Negative | ~80%      | 80.25% |
+| Neutral  | ~75%      | 75.18% |
+| Positive | ~86%      | 85.99% |
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Category | Tools |
-|----------|-------|
-| Language | Python 3 |
-| Deep Learning | PyTorch |
-| Data processing | pandas, NumPy |
-| Evaluation | scikit-learn |
-| Visualization | matplotlib, seaborn |
-| Environment | Kaggle (T4 GPU) |
+| Category        | Tools               |
+| --------------- | ------------------- |
+| Language        | Python 3            |
+| Deep Learning   | PyTorch             |
+| Data processing | pandas, NumPy       |
+| Evaluation      | scikit-learn        |
+| Visualization   | matplotlib, seaborn |
+| Environment     | Kaggle (T4 GPU)     |
 
 ---
 
