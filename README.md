@@ -1,6 +1,6 @@
 # 🤖 Sentiment Analysis - Transformer From Scratch (PyTorch)
 
-A full end-to-end NLP pipeline that implements a **Transformer Encoder from scratch** in PyTorch for 3-class sentiment classification — without relying on `nn.Transformer` or pretrained models.
+A full end-to-end NLP pipeline that implements a **Transformer Encoder from scratch** in PyTorch for 3-class sentiment classification - without relying on `nn.Transformer` or pretrained models.
 
 ---
 
